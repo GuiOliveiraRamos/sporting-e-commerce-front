@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import styled from "styled-components";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <MenuLateral>
+        <h1>
+          LOJA DE
+          <br /> ESPORTES
+        </h1>
+        <ul>
+          <li>Home</li>
+          <li>Produtos</li>
+          <li>Sobre</li>
+          <li>Contato</li>
+        </ul>
+        <p>CARRINHO DE COMPRAS</p>
+      </MenuLateral>
     </>
-  )
+  );
 }
 
-export default App
+const MenuLateral = styled.main`
+  width: 300px;
+  height: 100%;
+  background-color: #144d22;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  font-family: "Roboto";
+
+  h1 {
+    color: white;
+  }
+  ul {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+  }
+  p {
+    color: white;
+  }
+`;
