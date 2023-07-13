@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import logo from '../assets/logo-simples.png'
 import axios from "axios";
 
 export default function SignUp(){
@@ -31,6 +32,7 @@ async function sendSignUpForm(ev){
 
 return (
 <PageArea>
+    <LogoSimples src={logo} />
     <form onSubmit={ev => sendSignUpForm(ev) }>
         <LIContainer>
             <LabelsCadastro htmlFor='username'>Nome:</LabelsCadastro> 
@@ -53,12 +55,18 @@ return (
         </LIContainer>
         
         <BtnsContainer>
-            <CancelBtn type='reset' onClick={(ev) => {ev.preventDefault(); confirm('Você deseja cancelar o seu cadastro?') ? navigate('/home') : ''}} >cancelar</CancelBtn>
+            <RedLink type='reset' onClick={(ev) => {ev.preventDefault(); confirm('Você deseja cancelar o seu cadastro?') ? navigate('/home') : ''}} >cancelar</RedLink>
             <SendBtn type='submit'>Cadastrar</SendBtn>
         </BtnsContainer>
     </form>
 </PageArea>
 )}
+
+const LogoSimples = styled.img`
+    width: 500px;
+    background-color: black;
+`
+
 const LIContainer = styled.div`
     width: 100%;
     height: 100%; 
@@ -72,16 +80,20 @@ const LIContainer = styled.div`
 const LabelsCadastro = styled.label`
     font-size: 20px;
     margin-left: 17%;
+    color: white;
     
 `
 const SendBtn = styled.button`
     max-width: 250px;
     width: 50%; 
+    background-color: #adff00;
+    color: black;
 `
-const CancelBtn = styled.a`
+const RedLink = styled.a`
     font-size: 18px; 
     margin-top: -8px;
-    color: #e63f3f;
+    color: #318b42;
+    text-align: center;
     text-decoration-line: underline;
     font-style: italic;
     &:hover {
@@ -91,10 +103,13 @@ const CancelBtn = styled.a`
 const InputCadastro = styled.input`
     width: 65%;
     height: 20px;
-    background-color: white;
-    color: black;
+    background-color: #318b42;
+    color: #adff00;
     margin-left: 15%;
     margin-right: 20%;
+    &::placeholder{
+        color: white;
+    }
 `
 const BtnsContainer = styled.div`
     width: 100%;
@@ -109,8 +124,8 @@ const PageArea = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
-    background-color: lightgray;
+    background-color: black;
     flex-direction: column;
-    justify-content: center;
-    align-items: space-evenly;   
+    justify-content: space-evenly;
+    align-items: center;  
 `
