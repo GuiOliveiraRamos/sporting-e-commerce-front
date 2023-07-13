@@ -7,6 +7,7 @@ import ConfirmPurchase from "./pages/ConfirmPurchase";
 import Purchased from "./pages/Purchased";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
+import UserInfo from "./pages/UserInfo";
 import {Route} from 'react-router-dom'
 import { Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -17,7 +18,6 @@ import axios from 'axios';
 
 export default function App() {
 
-  
   return (
   <>
   <BrowserRouter>
