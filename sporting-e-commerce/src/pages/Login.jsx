@@ -52,7 +52,8 @@ return (
 )}
 
 const LogoSimples = styled.img`
-    width: 500px;
+    max-width: 500px;
+    width: 80%;
     background-color: black;
 `
 

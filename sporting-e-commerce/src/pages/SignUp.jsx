@@ -55,15 +55,17 @@ return (
         </LIContainer>
         
         <BtnsContainer>
-            <RedLink type='reset' onClick={(ev) => {ev.preventDefault(); confirm('Você deseja cancelar o seu cadastro?') ? navigate('/home') : ''}} >cancelar</RedLink>
+            <RedLink color='#154e20' type='reset' onClick={(ev) => {ev.preventDefault(); confirm('Você deseja cancelar o seu cadastro?') ? navigate('/home') : ''}} >cancelar</RedLink>
             <SendBtn type='submit'>Cadastrar</SendBtn>
         </BtnsContainer>
+        <RedLink color='#318b42' type='reset' onClick={(ev) => {ev.preventDefault();  navigate('/')}} >Já tem um conta? <br/> Faça o login</RedLink>
     </form>
 </PageArea>
 )}
 
 const LogoSimples = styled.img`
-    width: 500px;
+    max-width: 500px;
+    width: 80%;
     background-color: black;
 `
 
@@ -92,12 +94,16 @@ const SendBtn = styled.button`
 const RedLink = styled.a`
     font-size: 18px; 
     margin-top: -8px;
-    color: #318b42;
+    color: ${x => x.color};
     text-align: center;
     text-decoration-line: underline;
     font-style: italic;
-    &:hover {
-        cursor: pointer;
+    &:hover{
+      cursor: pointer;
+      color: #adff00;
+      &:active {
+        color: #318b42;
+      }
     }
 `
 const InputCadastro = styled.input`
