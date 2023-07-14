@@ -15,3 +15,5 @@ export default function UserProvider({children}) {
     </UserContext.Provider>
   )
 }
+
+export const LoggedContext = createContext();

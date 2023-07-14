@@ -2,8 +2,11 @@ import styled from "styled-components";
 import logo from "../assets/logo-completa.png";
 import { useNavigate } from "react-router-dom";
 import bolaBasquete from "../assets/bolaBasquete.jpg";
+import { useContext } from "react";
+import { LoggedContext } from "../contexts/UserContext";
 
 export default function MenuLateral() {
+  const loggedcontexto = useContext(LoggedContext)
   const navigate = useNavigate();
   return (
     <>
@@ -18,8 +21,8 @@ export default function MenuLateral() {
         <Carrinho onClick={() => navigate("/meu-carrinho")}>
           Meu Carrinho
         </Carrinho>
-        <Carrinho onClick={() => navigate("/")}>Login</Carrinho>
-        <Carrinho onClick={() => navigate("/cadastro")}>Cadastre-se</Carrinho>
+        <Carrinho color={loggedcontexto.logged} onClick={loggedcontexto.logged ? () => {confirm('Você deseja sair da sua conta?'); localStorage.clear('token'); loggedcontexto.setLogged(false)} : () => navigate("/")}>{loggedcontexto.logged ? 'Logout' : 'Login'}</Carrinho>
+        <Carrinho hide={loggedcontexto.logged} onClick={() => navigate("/cadastro")}>Cadastre-se</Carrinho>
       </MenuContainer>
     </>
   );
@@ -28,17 +31,17 @@ const Carrinho = styled.p`
   width: 16vw;
   height: 4vh;
   font-size: 18px;
-  background-color: white;
+  background-color: ${x => x.color ? 'red' : 'white'};
   color: black;
   font-weight: bold;
   border-radius: 5px;
-  display: flex;
+  display: ${x => x.hide ? 'none' : 'flex'};
   justify-content: center;
   align-items: center;
   margin-bottom: 1vh;
   &:hover {
     cursor: pointer;
-    background-image: linear-gradient(to bottom, black, #318b42);
+    background-image: linear-gradient(to bottom, black, ${x => x.color ? 'red, red' : '#318b42'});
     color: #adff00;
     &:active {
       color: #318b42;

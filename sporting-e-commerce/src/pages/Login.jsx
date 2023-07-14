@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import axios from "axios";
 import logo from "../assets/logo-simples.png";
 
-export default function Login() {
+export default function Login(props) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +18,7 @@ export default function Login() {
       alert(`Login feito com sucesso!`);
       console.log(res.data);
       localStorage.setItem("token", res.data);
+      props.setLogged(true)
       navigate("/home");
     } catch (err) {
       console.log(err);

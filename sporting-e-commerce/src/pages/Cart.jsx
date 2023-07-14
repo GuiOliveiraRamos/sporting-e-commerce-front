@@ -1,14 +1,17 @@
 import { styled } from "styled-components";
 import MenuLateral from "../components/MenuLateral";
 import { useNavigate } from "react-router";
-export default function Cart(props) {
+import { useContext } from "react";
+import { LoggedContext } from "../contexts/UserContext";
+export default function Cart() {
+  const loggedcontexto = useContext(LoggedContext)
   const navigate = useNavigate();
   return (
     <>
       <MenuLateral />
       <ContainerCarrinho>
-        <div>Que pena, parece que seu carrinho está vazio!</div>
-        <button onClick={() => navigate("/home")}>Continuar comprando</button>
+        <div>{loggedcontexto.logged ? 'Que pena, parece que seu carrinho está vazio!' : 'Você precisa fazer o login para acessar essa parte!'}</div>
+        <button onClick={() => loggedcontexto.logged ? navigate("/produtos") : navigate("/")}>{loggedcontexto.logged ? 'Continuar comprando' : 'Fazer Login'}</button>
       </ContainerCarrinho>
     </>
   );
