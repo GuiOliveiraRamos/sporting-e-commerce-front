@@ -1,3 +1,1 @@
-export default function ConfirmPurchase(props){
-
-}
+export default function ConfirmPurchase(props) {}

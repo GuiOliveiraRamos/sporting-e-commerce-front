@@ -3,7 +3,8 @@ import { createContext, useState } from "react"
 export const UserContext = createContext();
 
 export default function UserProvider({children}) {
-  const localUser = JSON.parse(localStorage.getItem("token"))
+  const localUser = localStorage.getItem("token")
+  console.log(localUser)
   const [user, setUser] = useState(localUser);
 
   const UserContext = createContext();

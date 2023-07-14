@@ -1,10 +1,17 @@
 import { styled } from "styled-components";
 import MenuLateral from "../components/MenuLateral";
-import bolaBasquete from "../assets/bolaBasquete.jpg";
+import partidaBasquete from "../assets/basket-partida.jpg";
+import partidaFutebol from "../assets/partida-futebol.jpg";
 import bolaFutebol from "../assets/bolaFutebol.jpg";
 import camisaFutebol from "../assets/camisaFutebol.jpg";
-
+import Carrossel from "../components/Carrossel";
+import { useEffect, useState } from "react";
+import { IconContext } from "react-icons/lib/cjs/iconContext";
+import { useNavigate } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 export default function Home() {
+
+  
   return (
     <>
       <MenuLateral />
@@ -14,61 +21,40 @@ export default function Home() {
           <p>Roupas</p>
           <p>Calçados</p>
           <p>Brinquedos</p>
+          <IconContext.Provider
+            value={{
+              style: { cursor: "pointer" },
+              color: "white",
+              size: "50px",
+              cursor: "pointer",
+            }}
+          >
+            <AiOutlineShoppingCart onClick={() => navigate("/meu-carrinho")} />
+          </IconContext.Provider>
         </Header>
         <ListaProdutos>
-          <div>
-            <img src={bolaBasquete} alt="" />
-            <h2>Bola de Basquete</h2>
-            <h3>R$ 50,00</h3>
-          </div>
-          <div>
-            <img src={bolaFutebol} alt="" />
-            <h2>Bola de Futebol</h2>
-            <h3>R$ 35,00</h3>
-          </div>
-          <div>
-            <img src={camisaFutebol} alt="" />
-            <h2>Camisa de Futebol</h2>
-            <h3>R$ 100,00</h3>
-          </div>
-          <div>
-            <img src={bolaBasquete} alt="" />
-            <h2>Bola de Basquete</h2>
-            <h3>R$ 50,00</h3>
-          </div>
-          <div>
-            <img src={bolaFutebol} alt="" />
-            <h2>Bola de Futebol</h2>
-            <h3>R$ 35,00</h3>
-          </div>
-          <div>
-            <img src={camisaFutebol} alt="" />
-            <h2>Camisa de Futebol</h2>
-            <h3>R$ 100,00</h3>
-          </div>
-          <div>
-            <img src={bolaBasquete} alt="" />
-            <h2>Bola de Basquete</h2>
-            <h3>R$ 50,00</h3>
-          </div>
-          <div>
-            <img src={bolaFutebol} alt="" />
-            <h2>Bola de Futebol</h2>
-            <h3>R$ 35,00</h3>
-          </div>
+        <Carrossel />
         </ListaProdutos>
       </D>
     </>
   );
 }
 
+const ImgProdA = styled.img``;
+
 const D = styled.div`
-  margin-left: 300px;
+  margin-left: 18vw;
+  height: 100vh;
+  overflow: hidden;
 `;
 const Header = styled.div`
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 18vw;
   height: 40px;
-  width: 100%;
-  background-color: #144d22;
+  width: 82vw;
+  background-image: linear-gradient(to bottom, black, #318b42);
   font-family: "Roboto";
   display: flex;
   justify-content: space-evenly;
@@ -76,17 +62,29 @@ const Header = styled.div`
 
   p {
     color: white;
+    &:hover {
+      cursor: pointer;
+      color: #adff00;
+      &:active {
+        color: #318b42;
+      }
+    }
   }
 `;
 const ListaProdutos = styled.div`
-  padding-top: 50px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 
   img {
-    width: 200px;
+    height: 100%;
+    opacity: 25%;
+    position: relative;
   }
+  /*
   div {
     width: 300px;
     height: 250px;
@@ -96,5 +94,5 @@ const ListaProdutos = styled.div`
     margin-bottom: 50px;
     font-family: "Roboto";
     color: #1fa74c;
-  }
+  }*/
 `;
