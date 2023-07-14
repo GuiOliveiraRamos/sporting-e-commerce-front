@@ -17,7 +17,7 @@ export default function Cart(props) {
 const ContainerCarrinho = styled.div`
   position: fixed;
   top: 0;
-  left: 300px;
+  left: 18vw;
   bottom: 0;
   right: 0;
   background-color: #467449;
