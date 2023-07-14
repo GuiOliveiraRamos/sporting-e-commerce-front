@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function MenuLateral() {
+  const navigate = useNavigate();
   return (
     <>
       <MenuContainer>
@@ -9,9 +11,9 @@ export default function MenuLateral() {
           <br /> ESPORTES
         </h1>
         <ul>
-          <li>Home</li>
-          <li>Produtos</li>
-          <li>Sobre</li>
+          <li onClick={() => navigate("/home")}>Home</li>
+          <li onClick={() => navigate("/produtos/?pagina")}>Produtos</li>
+          <li onClick={() => navigate("/sobre-nos")}>Sobre</li>
           <li>Contato</li>
         </ul>
         <p>CARRINHO DE COMPRAS</p>
@@ -21,7 +23,7 @@ export default function MenuLateral() {
 }
 
 const MenuContainer = styled.main`
-  width: 300px;
+  width: 250px;
   height: 100%;
   background-color: #144d22;
   position: fixed;
