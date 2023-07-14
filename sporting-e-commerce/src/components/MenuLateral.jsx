@@ -9,12 +9,12 @@ export default function MenuLateral() {
       <MenuContainer>
         <LogoComp src={logo} />
         <ul>
-          <li>Home</li>
+          <li onClick={() => navigate('/home')}>Home</li>
           <li>Produtos</li>
           <li>Sobre</li>
           <li>Contato</li>
         </ul>
-        <Carrinho>Meu Carrinho</Carrinho>
+        <Carrinho onClick={()=>navigate('/meu-carrinho')}>Meu Carrinho</Carrinho>
         <Carrinho onClick={()=>navigate('/')}>Login</Carrinho>
         <Carrinho onClick={()=>navigate('/cadastro')}>Cadastre-se</Carrinho>
       </MenuContainer>

@@ -17,10 +17,10 @@ export default function Cart(props) {
 const ContainerCarrinho = styled.div`
   position: fixed;
   top: 0;
-  left: 300px;
+  left: 18vw;
   bottom: 0;
   right: 0;
-  background-color: #467449;
+  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,5 +36,11 @@ const ContainerCarrinho = styled.div`
     background-color: #144d22;
     font-family: "Roboto";
     font-weight: 300;
+    &:hover{
+    background-image: linear-gradient( to top, black, #318b42, #318b42 );
+    &:active {
+      background-image: linear-gradient( to bottom, black, #318b42, #318b42 );
+    }
+  }
   }
 `;

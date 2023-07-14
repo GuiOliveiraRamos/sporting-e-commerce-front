@@ -8,34 +8,8 @@ import Carrossel from "../components/Carrossel";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [rodarCarrossel, setRodarCarrossel] = useState(false)
-  const [image, setImage] = useState(0);
 
-  function mudarImagem(){
-
-    setInterval(()=> {
-      n++
-      switch (n%4){
-        case 0:
-          setImage(0)
-          console.log('foi 1')
-          break;
-        case 1:
-          setImage(1)
-          console.log('foi outro')
-          break;
-        case 2:
-          setImage(2)
-          console.log('foi mais um');
-          break;
-        default:
-          setImage(3)
-          console.log('foram todos')
-      }
-    }, 3000)
-  }
-
- 
+  
   return (
     <>
       <MenuLateral />
@@ -47,63 +21,12 @@ export default function Home() {
           <p>Brinquedos</p>
         </Header>
         <ListaProdutos>
-        <Carrossel image={partidaBasquete}/>
-        <ImgProdA src={partidaFutebol} alt="" />
-        <DestaqueInfo>
-          <DestaqueTitulo>Mês do Basquete</DestaqueTitulo>
-          <DestaqueSubtitulo>Camiseta do seu time! <br/>Além de bermuda, tênis, bolas e acessórios!</DestaqueSubtitulo>
-          <DestaqueBtn>Venha conferir!</DestaqueBtn>
-        </DestaqueInfo>
+        <Carrossel />
         </ListaProdutos>
       </D>
     </>
   );
 }
-const DestaqueInfo = styled.div`
-  width: 60vw;
-  height: 40vh;
-  position: absolute;
-  top: 30vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  border: 2px solid #318b425a ;
-  padding-bottom: 10px;
-  border-radius: 10px;
-  &:hover{
-    background-image: linear-gradient( to bottom, black, #00000068, #318b4268 );
-  }
-`
-const DestaqueTitulo = styled.h1`
-  color: white;
-  font-size: 8vh;
-  font-weight: bold;
-  text-align: center;
-
-`
-const DestaqueSubtitulo = styled.h2`
-  color: white;
-  font-size: 4vh;
-  text-align: center;
-  font-style: italic;
-`
-const DestaqueBtn = styled.button`
-  width: 15vw;
-  height: 8vh;
-  font-size: 3vh;
-  background-color: #adff00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  &:hover{
-    background-image: linear-gradient( to top, black, #adff00, #adff00 );
-    &:active {
-      background-image: linear-gradient( to bottom, black, #adff00, #adff00 );
-    }
-  }
-`
 
 const ImgProdA = styled.img`
  
