@@ -25,7 +25,6 @@ async function sendSignUpForm(ev){
     } catch(err){
         console.log(err)
         alert(`${err.status} - ${err.message}`)
-    
     }
 
 }
@@ -36,22 +35,22 @@ return (
     <form onSubmit={ev => sendSignUpForm(ev) }>
         <LIContainer>
             <LabelsCadastro htmlFor='username'>Nome:</LabelsCadastro> 
-            <InputCadastro onChange={x => setName(x.target.value)} name='username' type="text" placeholder="nome" required></InputCadastro>
+            <InputCadastro onChange={x => setName(x.target.value)} id='username' type="text" placeholder="nome" required></InputCadastro>
         </LIContainer>
 
         <LIContainer>
             <LabelsCadastro htmlFor='email'>E-mail:</LabelsCadastro> 
-            <InputCadastro onChange={x => setEmail(x.target.value)} type="email" name="email" placeholder="e-mail" required></InputCadastro>
+            <InputCadastro onChange={x => setEmail(x.target.value)} type="email" id="email" placeholder="e-mail" required></InputCadastro>
         </LIContainer>
         
         <LIContainer>
             <LabelsCadastro htmlFor='password'>Senha:</LabelsCadastro> 
-            <InputCadastro onChange={x => setPassword(x.target.value)} type="password" name="password" placeholder="senha" required></InputCadastro>
+            <InputCadastro onChange={x => setPassword(x.target.value)} type="password" id="password" placeholder="senha" required></InputCadastro>
         </LIContainer>
         
         <LIContainer>
             <LabelsCadastro htmlFor='checkPassword'>Confirme sua senha:</LabelsCadastro> 
-            <InputCadastro onChange={x => setCheckPass(x.target.value)} type="password" name="checkPassword" placeholder="confirme sua senha" required></InputCadastro>
+            <InputCadastro onChange={x => setCheckPass(x.target.value)} type="password" id="checkPassword" placeholder="confirme sua senha" required></InputCadastro>
         </LIContainer>
         
         <BtnsContainer>
@@ -64,7 +63,7 @@ return (
 )}
 
 const LogoSimples = styled.img`
-    max-width: 500px;
+    max-width: 300px;
     width: 80%;
     background-color: black;
 `
@@ -93,7 +92,7 @@ const SendBtn = styled.button`
 `
 const RedLink = styled.a`
     font-size: 18px; 
-    margin-top: -8px;
+    margin-top: -10px;
     color: ${x => x.color};
     text-align: center;
     text-decoration-line: underline;

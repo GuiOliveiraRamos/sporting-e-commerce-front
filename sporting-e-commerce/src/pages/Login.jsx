@@ -35,12 +35,12 @@ return (
 
         <LIContainer>
             <LabelsCadastro htmlFor='email'>E-mail:</LabelsCadastro> 
-            <InputCadastro onChange={x => setEmail(x.target.value)} type="email" name="email" placeholder="e-mail" required></InputCadastro>
+            <InputCadastro onChange={x => setEmail(x.target.value)} type="email" id="email" placeholder="e-mail" required></InputCadastro>
         </LIContainer>
         
         <LIContainer>
             <LabelsCadastro htmlFor='password'>Senha:</LabelsCadastro> 
-            <InputCadastro onChange={x => setPassword(x.target.value)} type="password" name="password" placeholder="senha" required></InputCadastro>
+            <InputCadastro onChange={x => setPassword(x.target.value)} type="password" id="password" placeholder="senha" required></InputCadastro>
         </LIContainer>
         
         <BtnsContainer>

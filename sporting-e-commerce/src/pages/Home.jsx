@@ -1,10 +1,41 @@
 import { styled } from "styled-components";
 import MenuLateral from "../components/MenuLateral";
-import bolaBasquete from "../assets/basket-partida.jpg";
+import partidaBasquete from "../assets/basket-partida.jpg";
+import partidaFutebol from "../assets/partida-futebol.jpg"
 import bolaFutebol from "../assets/bolaFutebol.jpg";
 import camisaFutebol from "../assets/camisaFutebol.jpg";
+import Carrossel from "../components/Carrossel";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [rodarCarrossel, setRodarCarrossel] = useState(false)
+  const [image, setImage] = useState(0);
+
+  function mudarImagem(){
+
+    setInterval(()=> {
+      n++
+      switch (n%4){
+        case 0:
+          setImage(0)
+          console.log('foi 1')
+          break;
+        case 1:
+          setImage(1)
+          console.log('foi outro')
+          break;
+        case 2:
+          setImage(2)
+          console.log('foi mais um');
+          break;
+        default:
+          setImage(3)
+          console.log('foram todos')
+      }
+    }, 3000)
+  }
+
+ 
   return (
     <>
       <MenuLateral />
@@ -16,7 +47,8 @@ export default function Home() {
           <p>Brinquedos</p>
         </Header>
         <ListaProdutos>
-        <ImgProdA src={bolaBasquete} alt="" />
+        <Carrossel image={partidaBasquete}/>
+        <ImgProdA src={partidaFutebol} alt="" />
         <DestaqueInfo>
           <DestaqueTitulo>Mês do Basquete</DestaqueTitulo>
           <DestaqueSubtitulo>Camiseta do seu time! <br/>Além de bermuda, tênis, bolas e acessórios!</DestaqueSubtitulo>
@@ -61,6 +93,9 @@ const DestaqueBtn = styled.button`
   height: 8vh;
   font-size: 3vh;
   background-color: #adff00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: black;
   &:hover{
     background-image: linear-gradient( to top, black, #adff00, #adff00 );
@@ -71,19 +106,21 @@ const DestaqueBtn = styled.button`
 `
 
 const ImgProdA = styled.img`
- width: 100%;
- opacity: 25%;
- position: relative;
+ 
 `
 
 const D = styled.div`
   margin-left: 18vw;
   height: 100vh;
-  overflow-y: hidden;
+  overflow: hidden;
 `;
 const Header = styled.div`
+  position: fixed;
+  z-index:10;
+  top:0;
+  left: 18vw;
   height: 40px;
-  width: 100%;
+  width: 82vw;
   background-image: linear-gradient( to bottom, black, #318b42 );
   font-family: "Roboto";
   display: flex;
@@ -109,9 +146,12 @@ const ListaProdutos = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
 
-/*img {
-    width: 200px;
+  img {
+    height: 100%;
+    opacity: 25%;
+    position: relative;
   }
+  /*
   div {
     width: 300px;
     height: 250px;
