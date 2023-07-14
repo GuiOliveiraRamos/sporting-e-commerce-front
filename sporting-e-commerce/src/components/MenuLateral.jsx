@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import logo from "../assets/logo-completa.png";
 import { useNavigate } from "react-router-dom";
-import bolaBasquete from "../assets/bolaBasquete.jpg";
 import { useContext } from "react";
 import { LoggedContext } from "../contexts/UserContext";
 

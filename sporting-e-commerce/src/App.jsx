@@ -24,8 +24,8 @@ if (localStorage.getItem('token')){
 }, [localStorage.getItem('token')])
 
   return (
+    <LoggedContext.Provider value={{logged, setLogged}}>
     <UserProvider>
-      <LoggedContext.Provider value={{logged, setLogged}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -40,7 +40,7 @@ if (localStorage.getItem('token')){
           <Route path="/compra-concluida" element={<Purchased />} />
         </Routes>
       </BrowserRouter>
-      </LoggedContext.Provider>
     </UserProvider>
+    </LoggedContext.Provider>
   );
 }

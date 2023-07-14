@@ -1,6 +1,8 @@
-import { useNavigate } from "react-router";
+import { styled } from "styled-components";
 import MenuLateral from "../components/MenuLateral";
-import styled from "styled-components";
+import us from "../assets/about-us.jpg"
+import { useNavigate } from "react-router";
+
 
 export default function AboutUs(props) {
   const navigate = useNavigate();
@@ -13,49 +15,26 @@ export default function AboutUs(props) {
     <>
       <MenuLateral />
       <ContainerSobreNos>
-        <h3>Quem somos</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut
-        </p>
+      <div className="title">Quem somos</div>
+      <div className="content">
+        <div className="us">
+          <img  src={us}/>
+        <p >Acreditamos que o esporte é muito mais do que apenas uma atividade física. É um estilo de vida que promove saúde, bem-estar e superação pessoal. Nossa missão é oferecer a você os equipamentos certos para ajudá-lo a atingir seus objetivos e explorar todo o seu potencial esportivo.</p>
+        </div>
+
+        <div className="par2">
+          <p >Na Sporting Store, valorizamos a satisfação do cliente acima de tudo. Nossa equipe está aqui para oferecer um atendimento personalizado, ajudando você a encontrar o produto perfeito para suas necessidades. Além disso, garantimos uma experiência de compra segura, fácil e rápida.</p>
+
+          <p>Explore nossa loja virtual, descubra os produtos de alta qualidade que temos disponíveis e comece a aprimorar seu desempenho esportivo. Junte-se à comunidade do SportLab e aproveite a emoção de estar bem equipado para alcançar seus objetivos esportivos.</p>
+        </div>
+      </div>
+
+
         <Buttons>
-          <button onClick={Logout}>Logout</button>
+          {localStorage.getItem("token") ? <button onClick={Logout}>Logout</button> : ""}
           <button>Continuar comprando</button>
         </Buttons>
+        
       </ContainerSobreNos>
     </>
   );
@@ -66,25 +45,44 @@ const ContainerSobreNos = styled.div`
   left: 18vw;
   bottom: 0;
   right: 0;
-  background-color: #467449;
+  background: rgb(118,184,130);
+  background: linear-gradient(0deg, rgba(118,184,130,1) 7%, rgba(17,55,24,1) 59%, rgba(3,15,5,1) 94%);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  h3 {
-    padding-top: 50px;
-    padding-bottom: 30px;
-    font-family: "Roboto";
-    font-size: 90px;
-    color: white;
-  }
+  
   p {
-    padding-left: 120px;
+    padding-left: 70px;
     padding-right: 120px;
+    margin-top: 20px;
     font-family: "Roboto";
     font-size: 20px;
     color: white;
+    line-height: 30px;
+  }
+  .content {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+
+  .us {
+    display: flex;
+    padding-top: 40px;
+    border-radius: 7px;
+    margin-left: 60px;
+    img {
+      width: 350px;
+      margin-left: 30px;
+      border-radius: 7px;
+    }
+  }
+  }
+  .title {
+    padding-top: 40px;
+    padding-bottom: 30px;
+    font-family: "Roboto";
+    font-size: 70px;
+    color: white;
+    text-align: center;
   }
 `;
 
