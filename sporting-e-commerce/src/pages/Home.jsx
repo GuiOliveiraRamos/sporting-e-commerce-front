@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 import { IconContext } from "react-icons/lib/cjs/iconContext";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-export default function Home() {
 
+export default function Home() {
+  const navigate = useNavigate();
   
   return (
     <>

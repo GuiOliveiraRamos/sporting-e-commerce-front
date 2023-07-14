@@ -10,8 +10,6 @@ import SignUp from "./pages/SignUp";
 import UserInfo from "./pages/UserInfo";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
-
-import axios from "axios";
 import UserProvider from "./contexts/UserContext";
 
 export default function App() {
