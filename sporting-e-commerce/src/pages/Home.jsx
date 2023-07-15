@@ -138,15 +138,4 @@ const ListaProdutos = styled.div`
     opacity: 25%;
     position: relative;
   }
-  /*
-  div {
-    width: 300px;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    font-family: "Roboto";
-    color: #1fa74c;
-  }*/
 `;
