@@ -21,10 +21,10 @@ export default function ProductsList(props) {
       <MenuLateral />
       <ListaProdutos>
         {produto.map((item) => (
-          <div>
+          <div key={item.id}>
             <img src={item.image} alt="" />
-            <h2>{item.name}</h2>
-            <h3>R${item.price}</h3>
+            <h2>{item.title}</h2>
+            <h3>{item.price}</h3>
           </div>
         ))}
       </ListaProdutos>
@@ -43,18 +43,28 @@ const ListaProdutos = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
+  gap: 35px;
+  overflow-y: auto;
   img {
     width: 200px;
+    border-radius: 5px;
+  }
+  h2 {
+    max-width: 225px;
+    text-align: center;
   }
   div {
-    width: 300px;
+    padding: 20px;
+    width: 275px;
     height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 50px;
+    align-items: center;
+    border-radius: 5px;
     font-family: "Roboto";
     color: white;
+    background-color: #8fc292;
+    gap: 10px;
   }
 `;
