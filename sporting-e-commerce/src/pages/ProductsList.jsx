@@ -6,9 +6,14 @@ import axios from "axios";
 export default function ProductsList(props) {
   const [produto, setProduto] = useState([]);
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/produtos`).then((res) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/produtos`)
+    .then((res) => {
       setProduto(res.data);
-    });
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    ;
   }, []);
 
   return (

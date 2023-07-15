@@ -10,11 +10,23 @@ import SignUp from "./pages/SignUp";
 import UserInfo from "./pages/UserInfo";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
-import UserProvider from "./contexts/UserContext";
+import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
+import UserProvider, { LoggedContext } from "./contexts/UserContext";
+import { useEffect, useState } from "react";
 
 export default function App() {
+const [logged, setLogged] = useState(false)
+useEffect(() => {
+if (localStorage.getItem('token')){
+  setLogged(true)
+}
+}, [localStorage.getItem('token')])
+
   return (
+    <LoggedContext.Provider value={{logged, setLogged}}>
     <UserProvider>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<SignUp />} />
@@ -27,6 +39,8 @@ export default function App() {
           <Route path="/confirmacao" element={<ConfirmPurchase />} />
           <Route path="/compra-concluida" element={<Purchased />} />
         </Routes>
+      </BrowserRouter>
     </UserProvider>
+    </LoggedContext.Provider>
   );
 }

@@ -23,64 +23,62 @@ const arrayDeInfos = [{
 
 
 export default function Carrossel(props){
-    const [rodarCarrossel, setRodarCarrossel] = useState(false)
-    const [image, setImage] = useState(0);
-    const [contador, setContador] = useState(0)
-    let start =0;
-    const interval = 10000
-    function mudarImagem(){
-    
-    setInterval(()=> {
-    const now = Date.now()
-    rodarCarrossel ? setRodarCarrossel(false) : setRodarCarrossel(true)
-    const n = now - start
-    console.log(now - start)
-    switch (Math.ceil(n/interval)%4){
-    case 0:
+  const [rodarCarrossel, setRodarCarrossel] = useState(false)
+  const [image, setImage] = useState(0);
+  const [contador, setContador] = useState(false)
+  let start=0;
+  const temporizador = 8000;
+  
+  function mudarImagem(){ 
+    if(contador) return ''
+
+    const meuIntervalo = setInterval(()=> {
+      const now = Date.now()
+      rodarCarrossel ? setRodarCarrossel(false) : setRodarCarrossel(true)
+      const n = now - start
+      switch (Math.ceil(n/temporizador)%4){
+      case 0:
         setImage(0)
         setRodarCarrossel(true)
-        console.log('foi 1')
         break;  
-    case 1:
+      case 1:
         setImage(1)
         setRodarCarrossel(true)
-        console.log('foi outro')
         break;
-    case 2:
+      case 2:
         setImage(2)
         setRodarCarrossel(true)
-        console.log('foi mais um');
         break;
-    case 3:
+      case 3:
         setImage(3)
         setRodarCarrossel(true)
-        console.log('foram todos')
         break;
-    default:
+      default:
         break;
-    }
-        setRodarCarrossel(false)
-    }, interval)
-    }
+      }
+      setRodarCarrossel(false)
+      setContador(true)
+    }, temporizador)
+  }
 
-    useEffect(()=> {
-        start = dayjs(new Date)
-        mudarImagem()
-    }, [])
+  useEffect(()=> {
+      start = dayjs(new Date)
+      mudarImagem()
+
+  }, [])
       
 
 
-    return(
-        <>
-        <Image src={arrayDeImagens[image]} />
-
-        <DestaqueInfo>
-          <DestaqueTitulo>{arrayDeInfos[image].titulo}</DestaqueTitulo>
-          <DestaqueSubtitulo>{arrayDeInfos[image].subtitulo}</DestaqueSubtitulo>
-          <DestaqueBtn>Venha conferir!</DestaqueBtn>
-        </DestaqueInfo>
-        </>
-    )
+  return(
+    <>
+    <Image src={arrayDeImagens[image]} />
+    <DestaqueInfo>
+      <DestaqueTitulo>{arrayDeInfos[image].titulo}</DestaqueTitulo>
+      <DestaqueSubtitulo>{arrayDeInfos[image].subtitulo}</DestaqueSubtitulo>
+      <DestaqueBtn>Venha conferir!</DestaqueBtn>
+    </DestaqueInfo>
+    </>
+  )
 }
 const Image = styled.img`  
     height: 100%;

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import axios from "axios";
 import logo from "../assets/logo-simples.png";
+import { LoggedContext } from "../contexts/UserContext";
 
 export default function Login() {
+  const loggedcontexto = useContext(LoggedContext)
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +20,7 @@ export default function Login() {
       alert(`Login feito com sucesso!`);
       console.log(res.data);
       localStorage.setItem("token", res.data);
+      loggedcontexto.setLogged(true)
       navigate("/home");
     } catch (err) {
       console.log(err);
