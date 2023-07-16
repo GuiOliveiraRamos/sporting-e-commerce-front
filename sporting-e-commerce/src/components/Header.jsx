@@ -1,17 +1,15 @@
 import { styled } from "styled-components";
-
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { IconContext } from "react-icons/lib/cjs/iconContext";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import axios from "axios";
 import { LoggedContext } from "../contexts/UserContext";
+import FilterProducts from "./FilterProducts";
 
 export default function Header() {
-  const loggedcontexto = useContext(LoggedContext)
+  const {logged, temProduto, setTemProduto, setQtdProduto, qtdProduto, setProduto} = useContext(LoggedContext)
   const navigate = useNavigate()
-  const [temProduto, setTemProduto] = useState(false)
-  const [qtdProduto, setQtdProduto] = useState('')
 
   useEffect(()=>{
   axios.get(`${import.meta.env.VITE_API_URL}/meu-carrinho`, {
@@ -26,15 +24,21 @@ export default function Header() {
     setTemProduto(false)
     setQtdProduto(0)
   })
-  }, [loggedcontexto.logged])
+  }, [logged])
   
   return (
     <>
         <Head>
-          <p onClick={() => navigate("/produtos")}>Todos os produtos</p>
-          <p onClick={() => navigate("/produtos/roupas")}>Roupas</p>
-          <p onClick={() => navigate("/produtos/calçados")}>Calçados</p>
-          <p onClick={() => navigate("/produtos/brinquedo")}>Brinquedos</p>
+          <p onClick={() => FilterProducts("produtos").then(res => setProduto(res.data)).catch(err => console.log(err))}>Todos os produtos</p>
+
+          <p onClick={() => FilterProducts("produtos/roupas").then(res => setProduto(res.data)).catch(err => console.log(err))}>Roupas</p>
+
+          <p onClick={() => FilterProducts("produtos/calcados").then(res => setProduto(res.data)).catch(err => console.log(err))}>Calçados</p>
+
+          <p onClick={() => FilterProducts("produtos/acessorios").then(res => setProduto(res.data)).catch(err => console.log(err))}>Acessórios</p>
+
+          <p onClick={() => FilterProducts("produtos/brinquedos").then(res => setProduto(res.data)).catch(err => console.log(err))}>Brinquedos</p>
+          
           <IconBox onClick={() => navigate("/meu-carrinho")} temitem={temProduto}>
             <CountProdCart temitem={temProduto}>{qtdProduto}</CountProdCart>
           <IconContext.Provider
