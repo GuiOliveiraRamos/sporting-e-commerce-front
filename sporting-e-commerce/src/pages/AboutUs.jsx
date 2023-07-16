@@ -19,7 +19,7 @@ export default function AboutUs(props) {
       <div className="content">
         <div className="us">
           <img  src={us}/>
-        <p >Acreditamos que o esporte é muito mais do que apenas uma atividade física. É um estilo de vida que promove saúde, bem-estar e superação pessoal. Nossa missão é oferecer a você os equipamentos certos para ajudá-lo a atingir seus objetivos e explorar todo o seu potencial esportivo.</p>
+          <p>Acreditamos que o esporte é muito mais do que apenas uma atividade física. É um estilo de vida que promove saúde, bem-estar e superação pessoal. Nossa missão é oferecer a você os equipamentos certos para ajudá-lo a atingir seus objetivos e explorar todo o seu potencial esportivo.</p>
         </div>
 
         <div className="par2">

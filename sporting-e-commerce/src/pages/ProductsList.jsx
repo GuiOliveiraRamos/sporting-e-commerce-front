@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import MenuLateral from "../components/MenuLateral";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../components/Header";
 
 export default function ProductsList(props) {
   const [produto, setProduto] = useState([]);
@@ -19,14 +20,19 @@ export default function ProductsList(props) {
   return (
     <>
       <MenuLateral />
+      <Header />
       <ListaProdutos>
-        {produto.map((item) => (
-          <div key={item.id}>
+        {produto.map((item) => {
+          console.log(item._id.slice(-4))
+          return(
+          
+          <div data-type={item.type} id= {item._id.slice(-4)} key={item._id.slice(-4)}>
             <img src={item.image} alt="" />
             <h2>{item.title}</h2>
             <h3>{item.price}</h3>
           </div>
-        ))}
+        
+        )})}
       </ListaProdutos>
     </>
   );
@@ -53,8 +59,9 @@ const ListaProdutos = styled.div`
     max-width: 225px;
     text-align: center;
   }
+  
   div {
-    padding: 20px;
+    padding: 20px 20px 40px 20px;
     width: 275px;
     height: 250px;
     display: flex;

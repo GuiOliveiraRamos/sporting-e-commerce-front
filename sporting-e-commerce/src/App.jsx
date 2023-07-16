@@ -11,7 +11,6 @@ import UserInfo from "./pages/UserInfo";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
 import UserProvider, { LoggedContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 

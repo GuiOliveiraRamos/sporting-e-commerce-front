@@ -32,6 +32,11 @@ const ContainerCarrinho = styled.div`
   font-family: "Roboto";
   font-size: 30px;
   font-weight: 500;
+  div {
+    text-align: center;
+    width: 500px;
+    line-height: 40px;
+  }
 
   button {
     margin-top: 20px;
