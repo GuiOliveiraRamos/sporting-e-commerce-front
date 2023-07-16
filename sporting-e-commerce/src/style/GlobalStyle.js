@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
         border: none;
         border-radius: 5px;
-        background-color: #a328d6;
         font-size: 20px;
         font-weight: 600;
         color: #fff;

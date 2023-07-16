@@ -30,8 +30,7 @@ export default function AboutUs(props) {
       </div>
 
 
-        <Buttons>
-          {localStorage.getItem("token") ? <button onClick={Logout}>Logout</button> : ""}
+        <Buttons> 
           <button>Continuar comprando</button>
         </Buttons>
         
@@ -49,6 +48,7 @@ const ContainerSobreNos = styled.div`
   background: linear-gradient(0deg, rgba(118,184,130,1) 7%, rgba(17,55,24,1) 59%, rgba(3,15,5,1) 94%);
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
   
   p {
     padding-left: 70px;
@@ -71,6 +71,7 @@ const ContainerSobreNos = styled.div`
     margin-left: 60px;
     img {
       width: 350px;
+      height: 200px;
       margin-left: 30px;
       border-radius: 7px;
     }
@@ -88,13 +89,14 @@ const ContainerSobreNos = styled.div`
 
 const Buttons = styled.div`
   margin-top: 50px;
-  width: 800px;
+  box-sizing: border-box;
+  width: 80vw;
   display: flex;
   justify-content: space-around;
   button {
     font-family: "Roboto";
     font-weight: 400;
-    background-color: #144d22;
+    background-color: ${x => x.logout? 'red' :'#144d22'};
     width: 300px;
   }
 `;

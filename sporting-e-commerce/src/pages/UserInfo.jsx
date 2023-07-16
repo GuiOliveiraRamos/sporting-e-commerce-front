@@ -459,9 +459,24 @@ const LabelsCadastro = styled.label`
 `;
 const SendBtn = styled.button`
   max-width: 250px;
+  max-height: 50px;
+  height: 60%;
   width: 100%;
-  background-color: #adff00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid grey;
+  background-image: linear-gradient(to bottom, #adff00, black) ;
   color: black;
+    &:hover {
+      cursor: pointer;
+      background-image: linear-gradient(to bottom, #318b42, black) ;
+      color: #adff00;
+      &:active {
+        background-image: linear-gradient(to top, #adff00, black) ;
+        color: #318b42;
+      }
+    }
 
 `;
 
