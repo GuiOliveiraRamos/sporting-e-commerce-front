@@ -11,12 +11,14 @@ import UserInfo from "./pages/UserInfo";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
-import UserProvider, { LoggedContext } from "./contexts/UserContext";
+import { LoggedContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 
 export default function App() {
 const [logged, setLogged] = useState(false)
+const [produto, setProduto] = useState([]);
+const [temProduto, setTemProduto] = useState(false)
+const [qtdProduto, setQtdProduto] = useState('')
 useEffect(() => {
 if (localStorage.getItem('token')){
   setLogged(true)
@@ -24,8 +26,7 @@ if (localStorage.getItem('token')){
 }, [localStorage.getItem('token')])
 
   return (
-    <LoggedContext.Provider value={{logged, setLogged}}>
-    <UserProvider>
+    <LoggedContext.Provider value={{logged, setLogged, produto, setProduto, qtdProduto, setQtdProduto, setTemProduto, temProduto}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -40,7 +41,6 @@ if (localStorage.getItem('token')){
           <Route path="/compra-concluida" element={<Purchased />} />
         </Routes>
       </BrowserRouter>
-    </UserProvider>
     </LoggedContext.Provider>
   );
 }

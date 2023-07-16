@@ -68,6 +68,7 @@ export default function Login() {
           Ainda não tem um conta? <br /> Faça o cadastro
         </RedLink>
       </form>
+      <SendBtn onClick={() => navigate("/produtos")}>Realizar login depois</SendBtn>
     </PageArea>
   );
 }
