@@ -38,7 +38,7 @@ export default function ProductsList(props) {
 }
 const Carrinho = styled.button`
   width: 16vw;
-  height: 30px;
+  height: auto;
   font-size: 18px;
   background-color: #FFF;
   color: black;

@@ -10,9 +10,11 @@ export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [disableForm, setDisableForm] = useState(false)
 
   async function sendSignUpForm(ev) {
     ev.preventDefault();
+    setDisableForm(true)
     const loginInfo = { email, password };
     console.log(loginInfo);
     try {
