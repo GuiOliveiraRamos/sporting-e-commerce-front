@@ -1,9 +1,21 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import axios from "axios";
 import logo from "../assets/logo-simples.png";
 import { LoggedContext } from "../contexts/UserContext";
+import { ThreeDots } from "react-loader-spinner";
+const pontinhos = 
+<ThreeDots 
+height="20" 
+width="100%" 
+radius="9"
+color="black" 
+ariaLabel="three-dots-loading"
+wrapperStyle={{}}
+wrapperClassName=""
+visible={true}
+ />
 
 export default function Login() {
   const loggedcontexto = useContext(LoggedContext)
@@ -12,6 +24,9 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [disableForm, setDisableForm] = useState(false)
 
+  useEffect(() => {
+    console.log(disableForm)
+  },[disableForm])
   async function sendSignUpForm(ev) {
     ev.preventDefault();
     setDisableForm(true)
@@ -27,6 +42,8 @@ export default function Login() {
     } catch (err) {
       console.log(err);
       alert(`${err.status} - ${err.message}`);
+    } finally{
+      setDisableForm(false)
     }
   }
 
@@ -42,6 +59,7 @@ export default function Login() {
             id="email"
             placeholder="e-mail"
             required
+            disabled={disableForm}
           ></InputCadastro>
         </LIContainer>
 
@@ -53,11 +71,12 @@ export default function Login() {
             id="password"
             placeholder="senha"
             required
+            disabled={disableForm}
           ></InputCadastro>
         </LIContainer>
 
         <BtnsContainer>
-          <SendBtn type="submit">Login</SendBtn>
+          <SendBtn type="submit" disabled={disableForm} >{ disableForm ? pontinhos : 'Login' }</SendBtn>
         </BtnsContainer>
         <RedLink
           color="#318b42"
@@ -101,6 +120,9 @@ const SendBtn = styled.button`
   width: 50%;
   background-color: #adff00;
   color: black;
+  &:disabled{
+    opacity: 30%;
+  }
 `;
 const RedLink = styled.a`
   font-size: 18px;
@@ -122,6 +144,9 @@ const InputCadastro = styled.input`
   margin-right: 20%;
   &::placeholder {
     color: white;
+  }
+  &:disabled{
+    opacity: 30%;
   }
 `;
 const BtnsContainer = styled.div`

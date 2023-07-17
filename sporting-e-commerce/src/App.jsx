@@ -36,7 +36,6 @@ if (localStorage.getItem('token')){
           <Route path="/meu-carrinho" element={<Cart />} />
           <Route path="/comprador" element={<UserInfo />} />
           <Route path="/sobre-nos" element={<AboutUs />} />
-          <Route path="/produtos/:id" element={<ProductsDetails />} />
           <Route path="/confirmacao" element={<ConfirmPurchase />} />
           <Route path="/compra-concluida" element={<Purchased />} />
         </Routes>

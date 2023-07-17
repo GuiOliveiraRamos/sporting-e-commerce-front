@@ -11,14 +11,15 @@ import Visa from '../assets/visa-logo.png'
 import DinnersClub from '../assets/dinnersclub-logo.png'
 import Mastercard from '../assets/mastercard-logo.png'
 import AmericanExpress from '../assets/american-express-logo.png'
+import PurchasingProducts from '../components/PurchasingProducts.jsx'
 export default function UserInfo() {
     const loggedcontexto = useContext(LoggedContext)
     const navigate = useNavigate()
-    const [temProduto, setTemProduto] = useState(false)
-    const [qtdProduto, setQtdProduto] = useState('')
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [celular, setCelular] = useState("");
+    const [cartao, setCartao] = useState("")
+    const [CPF, setCPF] = useState("")
     const [CEP, setCEP] = useState("")
     const [logradouro, setLogradouro] = useState("")
     const [bairro, setBairro] = useState("")
@@ -31,6 +32,7 @@ export default function UserInfo() {
     const [titular, setTitular] = useState('')
     const [vencimento, setVencimento] = useState('')
     const [codSeguranca, setCodSeguranca] = useState('')
+    const [selectedProducts, setSelectedProducts] = useState([])
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/cadastro`, { headers: { token: localStorage.getItem('token') } })
@@ -38,8 +40,21 @@ export default function UserInfo() {
                 setEmail(res.data.email)
                 setName(res.data.name)
             })
+            .catch(err => {
+                console.log(err)
+            })
+
+        axios.get(`${import.meta.env.VITE_API_URL}/meu-carrinho`, {headers: {token: localStorage.getItem('token')}})
+            .then(res => {
+                setSelectedProducts(res.data)
+            })
+            .catch(err => {console.log(err)})
     }, [])
+    let saldo = 0;
+    selectedProducts.map(x=> saldo += parseFloat(x.price))
+
     function cpfMascara(cpf) {
+        setCPF(cpf.target.value)
         let cpfFormat = cpf.target.value.replace(/\D/g, "");
         cpfFormat = cpfFormat.replace(/(\d{3})(\d)/, "$1.$2");
         cpfFormat = cpfFormat.replace(/(\d{3})(\d)/, "$1.$2");
@@ -79,6 +94,7 @@ export default function UserInfo() {
     }
 
     function cartaoMascara(cartao) {
+        setCartao(cartao.target.value);
         let cartaoFormat = cartao.target.value
         cartaoFormat = cartaoFormat.replace(/\D/g, "");
         cartaoFormat = cartaoFormat.replace(/^(\d{4})(\d)/g, "$1 $2");
@@ -106,24 +122,26 @@ export default function UserInfo() {
 
     }
 
-    async function sendSignUpForm(ev) {
+    function sendForm(ev) {
         ev.preventDefault();
-        const loginInfo = { email, password };
-        console.log(loginInfo);
-        try {
-            let res = await axios.post(`${import.meta.env.VITE_API_URL}/`, loginInfo);
-            alert(`Login feito com sucesso!`);
-            console.log(res.data);
-            localStorage.setItem("token", res.data);
-            loggedcontexto.setLogged(true)
-            navigate("/home");
-        } catch (err) {
-            console.log(err);
-            alert(`${err.status} - ${err.message}`);
-        }
+        console.log(localStorage.getItem('token'))
+        const user = {name, email, CPF, celular}
+        const adress = {CEP, logradouro, bairro, cidade, estado, numero, complemento}
+        const card = {cartao, titular, vencimento, codSeguranca}
+        const products = selectedProducts
+        axios.post(`${import.meta.env.VITE_API_URL}/comprador`, {
+            headers: {token: localStorage.getItem('token')},
+            body: {user, adress, card, products}
+        })
+        .then(res => {
+            console.log(res)
+            navigate('/confirmacao')
+        })
+        .catch(console.log)
     }
 
     function celMascara(cel) {
+        setCelular(cel.target.value);
         let celFormat = cel.target.value.replace(/\D/g, "");
         celFormat = celFormat.replace(/^(\d\d)(\d)/g, "($1)$2");
         celFormat = celFormat.replace(/(\d{5})(\d)/, "$1-$2");
@@ -133,7 +151,7 @@ export default function UserInfo() {
     return (
         <>
             <D>
-                <ContainerDadosUsuario id="dados-do-comprador" onSubmit={(ev) => sendSignUpForm(ev)}>
+                <ContainerDadosUsuario id="dados-do-comprador" onSubmit={(ev) => sendForm(ev)}>
                 <Divisoria><span> </span><p> PESSOAIS </p><span> </span></Divisoria>
                     <LIContainer>
                         <LabelsCadastro htmlFor="email">E-mail:</LabelsCadastro>
@@ -297,7 +315,7 @@ export default function UserInfo() {
                             onChange={x => setVencimento(x.target.value)}
                             name="vencimento"
                             id="vencimento"
-                            maxLength='5'
+                            maxLength='4'
                             required
                         ></InputCadastro>
                     </LIContainer>
@@ -318,14 +336,108 @@ export default function UserInfo() {
                     <LogoContainer>
                         <LogoSimples src={logo} />
                     </LogoContainer>
+                    <ProductsList>
+                        {selectedProducts.map(x => {
+                            return <PurchasingProducts key={x.name} name={x.name} price={x.price} image={x.image} />
+                        })}
+                    </ProductsList>
+                    <InfoCarrinho>
+                        <Quantidade>
+                        Itens: <br/> <strong>{selectedProducts.length}</strong>  
+                        </Quantidade>
+                        <Saldo>
+                        Valor Total:<strong>R$ {saldo.toFixed(2).replace('.', ',')} </strong>
+                        </Saldo>
+                    </InfoCarrinho> 
                     <BtnsContainer>
                         <SendBtn form="dados-do-comprador" type="submit">Finalizar Compra</SendBtn>
+                        <ContinuarComprando onClick={() => navigate("/produtos")}> Continuar Comprando</ContinuarComprando>
                     </BtnsContainer>
                 </ContainerDadosPedido>
             </D>
         </>
     )
 }
+const ContinuarComprando = styled.p`
+    color: blue;
+    text-decoration:underline;
+    &:hover{
+        color: #adff00;
+        cursor: pointer;
+        &:active{
+            color: #318b42;
+        }
+    }
+`
+const ContainerDadosPedido = styled.div`
+    box-sizing: border-box;
+    height: auto;
+    width: 35vw;
+    border: 5px solid #adff00;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    align-items: center;
+`;
+const BtnsContainer = styled.div`
+    position: fixed;
+    bottom: 20vh;
+    gap: 40px;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const InfoCarrinho = styled.div`
+    position: fixed;
+    bottom: 35vh;
+    width: 30vw;
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+h2{
+    font-size: 120%;
+}
+`
+const Quantidade =styled.h2`
+  width: 30%;
+  height: 100%;
+  box-sizing: border-box;
+  color: white;
+  border: 2px solid #adff00;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  strong{
+    color: #adff00;
+  }
+`
+const Saldo = styled.h2`
+  box-sizing: border-box;
+  width: 70%;
+  height: 100%;
+  color: white;
+  border: 2px solid #adff00;
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  align-items: center;
+  strong{
+    color: #adff00;
+  }
+`
+const ProductsList = styled.div`
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    gap: 1vh;
+    background-color: #ffffff17;
+`
 const Divisoria = styled.div`
     width: 100%;
     display: flex;
@@ -395,17 +507,7 @@ const ContainerEndereco = styled.div`
         width:  30%;
     }
 `
-const ContainerDadosPedido = styled.div`
-  box-sizing: border-box;
-  height: auto;
-  width: 35vw;
-  border: 5px solid #adff00;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 10vh;
-  align-items: center;
-`;
+
 const LogoContainer = styled.div`
     width: 30vw;
     max-width: 200px;
@@ -516,71 +618,3 @@ const InputCadastro = styled.input`
         background-color: black;
     }
 `;
-const BtnsContainer = styled.div`
-  width: 100%;
-  height: 70px;
-  display: flex;
-  flex-direction: row;
-  gap: 13%;
-  justify-content: center;
-`;
-
-/*
-const CountProdCart = styled.div`
-width: 20px;
-height: 20px;
-background-color: #adff00;
-color: black;
-font-weight: bold;
-display: ${x => true ? 'flex' : 'none'};
-align-items: center;
-justify-content: center;
-border-radius: 50%;
-position: absolute;
-top:0px;
-right:-8px;
-
-`;
-
-const IconBox = styled.div`
-width: 40px;
-height: 40px;
-background-color:${x =>true ? 'white' : ''};
-display: flex;
-align-items: center;
-justify-content: center;
-border-radius: 50%;
-position: relative;
-&:hover{
-  cursor: pointer;
-  background-color: #adff00;
-  div {
-    background-color: #318b42;
-  }
-}
-`;
-const Header = styled.div`
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 18vw;
-  height: 40px;
-  width: 82vw;
-  background-image: linear-gradient(to bottom, black, #318b42);
-  font-family: "Roboto";
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  p {
-    color: white;
-    &:hover {
-      cursor: pointer;
-      color: #adff00;
-      &:active {
-        color: #318b42;
-      }
-    }
-  }
-`;
-*/
